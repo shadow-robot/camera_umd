@@ -369,12 +369,18 @@ int Cam::grab(unsigned char **frame, uint32_t &bytes_used)
     unsigned char *pyuv_last = last_yuv_frame;
     for (unsigned i = 0; i < width * height * 2; i += 4)
     {
-      *prgb++ = sat(pyuv[i]+1.402f  *(pyuv[i+3]-128));
-      *prgb++ = sat(pyuv[i]-0.34414f*(pyuv[i+1]-128)-0.71414f*(pyuv[i+3]-128));
-      *prgb++ = sat(pyuv[i]+1.772f  *(pyuv[i+1]-128));
-      *prgb++ = sat(pyuv[i+2]+1.402f*(pyuv[i+3]-128));
-      *prgb++ = sat(pyuv[i+2]-0.34414f*(pyuv[i+1]-128)-0.71414f*(pyuv[i+3]-128));
-      *prgb++ = sat(pyuv[i+2]+1.772f*(pyuv[i+1]-128));
+      //*prgb++ = sat(pyuv[i]+1.402f  *(pyuv[i+3]-128));
+      //*prgb++ = sat(pyuv[i]-0.34414f*(pyuv[i+1]-128)-0.71414f*(pyuv[i+3]-128));
+      //*prgb++ = sat(pyuv[i]+1.772f  *(pyuv[i+1]-128));
+      //*prgb++ = sat(pyuv[i+2]+1.402f*(pyuv[i+3]-128));
+      //*prgb++ = sat(pyuv[i+2]-0.34414f*(pyuv[i+1]-128)-0.71414f*(pyuv[i+3]-128));
+      //*prgb++ = sat(pyuv[i+2]+1.772f*(pyuv[i+1]-128));
+      *prgb++ = pyuv[i];
+      *prgb++ = pyuv[i];
+      *prgb++ = pyuv[i];
+      *prgb++ = pyuv[i];
+      *prgb++ = pyuv[i];
+      *prgb++ = pyuv[i];
       if ((int)pyuv[i] - (int)pyuv_last[i] > motion_threshold_luminance ||
           (int)pyuv_last[i] - (int)pyuv[i] > motion_threshold_luminance)
         num_pixels_different++;
